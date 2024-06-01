@@ -15,7 +15,7 @@ import org.scalatestplus.junit.JUnitRunner
 
 
 @RunWith(classOf[JUnitRunner])
-class NewtonTest_1 extends AnyFunSuite{
+class NewtonMostrar extends AnyFunSuite{
   val e = new Newton()
   test("Expresion1"){
     assert(e.mostrar(e.Expo(e.Atomo('x'), e.Numero(2.0))) == "(x ^ 2.0)")

@@ -104,6 +104,7 @@ class Newton {
     val expr5 = Prod(Div(expr1, expr2), Resta(expr3, expr4))
     val expr6 = Expo(Atomo('x'), Numero(3))
 
+
     println(mostrar(expr1)) // (x + 2.0)
     println(mostrar(expr2)) // (x * x)
     println(mostrar(expr3)) // ((x + 2.0) + ((x * x) ^ 5.0))
@@ -126,6 +127,7 @@ class Newton {
     println(evaluar(Logaritmo(expr1), Atomo('x'), 5.0)) // 1.9459101490553132
 
     println(mostrar(limpiar(derivar(Suma(Atomo('k'), Prod(Numero(3.0), Atomo('x'))), Atomo('x'))))) // 3.0
+
 
     val e1 = Resta(Prod(Atomo('x'), Atomo('x')), Numero(2))
     println(raizNewton(e1, Atomo('x'), 1.0, buenaAprox)) // Ejemplo de uso de raizNewton
