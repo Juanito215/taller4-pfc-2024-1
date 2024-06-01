@@ -1,3 +1,5 @@
-# Repositorio base
+*Joseph David Herrera Libreros - 2266309*
 
-Este repositorio tiene las configuraciones y librerías necesarias para trabajar concurrencia
+*Samuel Escobar Rivera - 2266363*
+
+*Juan David Cuellar Lopez - 2266087*

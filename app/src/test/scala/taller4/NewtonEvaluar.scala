@@ -14,7 +14,7 @@ import org.scalatestplus.junit.JUnitRunner
 
 
 @RunWith(classOf[JUnitRunner])
-class NewtonTest_3 extends AnyFunSuite{
+class NewtonEvaluar extends AnyFunSuite{
 
   val e = new Newton()
   test("EvaluarTest1") {
