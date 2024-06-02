@@ -14,7 +14,7 @@ import taller4.Newton
 
 
 @RunWith(classOf[JUnitRunner])
-class NewtonRaizNewton extends AnyFunSuite{
+class NewtonRaiz extends AnyFunSuite{
 
   val e = new Newton()
 
