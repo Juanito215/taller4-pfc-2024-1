@@ -37,9 +37,9 @@ class NewtonLimpiar extends AnyFunSuite {
   test("LimpiarTest4") {
     val expr = e.Suma(e.Logaritmo(e.Atomo('x')), e.Expo(e.Atomo('y'), e.Numero(2)))
     val derivada = e.limpiar(e.derivar(expr, e.Atomo('y')))
-    val expectedDerivative = e.Prod(e.Numero(2), e.Atomo('y'))
+    val result = e.Prod(e.Numero(2), e.Atomo('y'))
 
-    assert(derivada == expectedDerivative)
+    assert(derivada == result)
   }
 
   test("LimpiarTest5") {
