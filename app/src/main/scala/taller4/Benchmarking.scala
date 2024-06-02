@@ -9,7 +9,7 @@ object Benchmarking {
 
 
   def runNewtonBenchmark(): Unit = {
-    val expr = n.Resta(n.Prod(n.Atomo('x'), n.Atomo('x')), n.Numero(2))
+    val expr = n.Resta(n.Prod(n.Atomo('x'), n.Atomo('x')), n.Numero(2)) //Cambiar por expresion mas compleja.
     val atom = n.Atomo('x')
     val initialValue = 1.0
 
@@ -18,7 +18,7 @@ object Benchmarking {
       Key.exec.maxWarmupRuns := 20,
       Key.exec.benchRuns := 10,
       Key.verbose := true
-    ) withWarmer (new Warmer.Default) measure {
+    ) withWarmer new Warmer.Default measure {
       n.raizNewton(expr, atom, initialValue, n.buenaAprox)
     }
 
