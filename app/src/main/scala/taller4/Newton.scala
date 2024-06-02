@@ -62,17 +62,36 @@ class Newton {
   def limpiar(f: Expr): Expr = f match {
     case Suma(Numero(0), e) => limpiar(e)
     case Suma(e, Numero(0)) => limpiar(e)
+    case Suma(e1, e2) => (limpiar(e1), limpiar(e2)) match {
+      case (Numero(0), e) => e
+      case (e, Numero(0)) => e
+      case (limpioE1, limpioE2) => Suma(limpioE1, limpioE2)
+    }
     case Resta(e, Numero(0)) => limpiar(e)
+    case Resta(e1, e2) => (limpiar(e1), limpiar(e2)) match {
+      case (limpioE1, limpioE2) => Resta(limpioE1, limpioE2)
+    }
     case Prod(Numero(1), e) => limpiar(e)
     case Prod(e, Numero(1)) => limpiar(e)
     case Prod(Numero(0), _) => Numero(0)
     case Prod(_, Numero(0)) => Numero(0)
+    case Prod(e1, e2) => (limpiar(e1), limpiar(e2)) match {
+      case (Numero(0), _) => Numero(0)
+      case (_, Numero(0)) => Numero(0)
+      case (Numero(1), e) => e
+      case (e, Numero(1)) => e
+      case (limpioE1, limpioE2) => Prod(limpioE1, limpioE2)
+    }
+    case Div(Numero(0), _) => Numero(0)
     case Div(e, Numero(1)) => limpiar(e)
-    case Suma(e1, e2) => Suma(limpiar(e1), limpiar(e2))
-    case Resta(e1, e2) => Resta(limpiar(e1), limpiar(e2))
-    case Prod(e1, e2) => Prod(limpiar(e1), limpiar(e2))
-    case Div(e1, e2) => Div(limpiar(e1), limpiar(e2))
-    case Expo(e1, e2) => Expo(limpiar(e1), limpiar(e2))
+    case Div(e1, e2) => (limpiar(e1), limpiar(e2)) match {
+      case (limpioE1, limpioE2) => Div(limpioE1, limpioE2)
+    }
+    case Expo(e, Numero(1)) => limpiar(e)
+    case Expo(e1, e2) => (limpiar(e1), limpiar(e2)) match {
+      case (limpioE1, Numero(1)) => limpioE1
+      case (limpioE1, limpioE2) => Expo(limpioE1, limpioE2)
+    }
     case Logaritmo(e1) => Logaritmo(limpiar(e1))
     case e => e
   }
@@ -95,39 +114,4 @@ class Newton {
     evaluar(f, a, d).abs < 0.001
   }
 
-  // Ejemplos de uso
-  def main(args: Array[String]): Unit = {
-    val expr1 = Suma(Atomo('x'), Numero(2))
-    val expr2 = Prod(Atomo('x'), Atomo('x'))
-    val expr3 = Suma(expr1, Expo(expr2, Numero(5)))
-    val expr4 = Logaritmo(Atomo('x'))
-    val expr5 = Prod(Div(expr1, expr2), Resta(expr3, expr4))
-    val expr6 = Expo(Atomo('x'), Numero(3))
-
-    println(mostrar(expr1)) // (x + 2.0)
-    println(mostrar(expr2)) // (x * x)
-    println(mostrar(expr3)) // ((x + 2.0) + ((x * x) ^ 5.0))
-    println(mostrar(expr4)) // (ln(x))
-    println(mostrar(expr5)) // (((x + 2.0) / (x * x)) * (((x + 2.0) + ((x * x) ^ 5.0)) - (ln(x))))
-    println(mostrar(expr6)) // (x ^ 3.0)
-
-    println(mostrar(derivar(expr6, Atomo('x')))) // ((x ^ 3.0) * (((1.0 * 3.0) / x) + (0.0 * (ln(x)))))
-    println(mostrar(derivar(expr2, Atomo('x')))) // ((1.0 * x) + (x * 1.0))
-    println(mostrar(derivar(expr2, Atomo('y')))) // ((0.0 * x) + (x * 0.0))
-    println(mostrar(derivar(Suma(Atomo('k'), Prod(Numero(3.0), Atomo('x'))), Atomo('x')))) // (0.0 + ((0.0 * x) + (3.0 * 1.0)))
-
-    println(evaluar(Numero(5.0), Atomo('x'), 1.0)) // 5.0
-    println(evaluar(Atomo('x'), Atomo('x'), 5.0)) // 5.0
-    println(evaluar(Suma(expr1, expr2), Atomo('x'), 5.0)) // 32.0
-    println(evaluar(Prod(expr1, expr2), Atomo('x'), 5.0)) // 175.0
-    println(evaluar(Resta(expr1, expr2), Atomo('x'), 5.0)) // -18.0
-    println(evaluar(Div(expr1, expr2), Atomo('x'), 5.0)) // 0.28
-    println(evaluar(Expo(expr1, expr2), Atomo('x'), 5.0)) // 1.341068619663965E21
-    println(evaluar(Logaritmo(expr1), Atomo('x'), 5.0)) // 1.9459101490553132
-
-    println(mostrar(limpiar(derivar(Suma(Atomo('k'), Prod(Numero(3.0), Atomo('x'))), Atomo('x'))))) // 3.0
-
-    val e1 = Resta(Prod(Atomo('x'), Atomo('x')), Numero(2))
-    println(raizNewton(e1, Atomo('x'), 1.0, buenaAprox)) // Ejemplo de uso de raizNewton
-  }
 }

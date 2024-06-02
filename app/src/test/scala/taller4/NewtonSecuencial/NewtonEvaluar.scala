@@ -5,16 +5,16 @@
  * @version 1.0
  */
 
-package taller4
+package taller4.NewtonSecuencial
 
-import org.apache.commons.math3.analysis.function.Exp
-import org.scalatest.funsuite.AnyFunSuite
 import org.junit.runner.RunWith
+import org.scalatest.funsuite.AnyFunSuite
 import org.scalatestplus.junit.JUnitRunner
+import taller4.Newton
 
 
 @RunWith(classOf[JUnitRunner])
-class NewtonTest_3 extends AnyFunSuite{
+class NewtonEvaluar extends AnyFunSuite{
 
   val e = new Newton()
   test("EvaluarTest1") {

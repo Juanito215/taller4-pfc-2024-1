@@ -3,19 +3,18 @@
  *         *Joseph David Herrera Libreros - 2266309
  *         *Juan David Cuellar Lopez - 2266087
  * @version 1.0
- * @note 22 de Noviembre de 2023
  */
 
-package taller4
+package taller4.NewtonSecuencial
 
-import org.apache.commons.math3.analysis.function.Exp
-import org.scalatest.funsuite.AnyFunSuite
 import org.junit.runner.RunWith
+import org.scalatest.funsuite.AnyFunSuite
 import org.scalatestplus.junit.JUnitRunner
+import taller4.Newton
 
 
 @RunWith(classOf[JUnitRunner])
-class NewtonTest_1 extends AnyFunSuite{
+class NewtonMostrar extends AnyFunSuite{
   val e = new Newton()
   test("Expresion1"){
     assert(e.mostrar(e.Expo(e.Atomo('x'), e.Numero(2.0))) == "(x ^ 2.0)")
