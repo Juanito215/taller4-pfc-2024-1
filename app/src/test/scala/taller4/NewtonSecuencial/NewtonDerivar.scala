@@ -1,3 +1,10 @@
+/**
+ * @author *Samuel Escobar Rivera - 2266363
+ *         *Joseph David Herrera Libreros - 2266309
+ *         *Juan David Cuellar Lopez - 2266087
+ * @version 1.0
+ */
+
 package taller4.NewtonSecuencial
 
 import org.junit.runner.RunWith

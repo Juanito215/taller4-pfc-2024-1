@@ -3,7 +3,6 @@
  *         *Joseph David Herrera Libreros - 2266309
  *         *Juan David Cuellar Lopez - 2266087
  * @version 1.0
- * @note 22 de Noviembre de 2023
  */
 
 package taller4.NewtonSecuencial
