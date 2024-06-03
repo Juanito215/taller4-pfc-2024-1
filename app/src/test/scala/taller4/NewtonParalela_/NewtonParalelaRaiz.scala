@@ -47,14 +47,41 @@ class NewtonParalelaRaiz extends AnyFunSuite {
   }
 
   test("raizNewtonTest4") {
-    val expr = e.Resta(e.Logaritmo(e.Atomo('x')), e.Numero(1.0))
-    val raizFuture = e.raizNewton(expr, e.Atomo('x'), 2300.355, buenaAprox)
+    val expr = e.Suma(
+      e.Suma(
+        e.Suma(
+          e.Suma(
+            e.Prod(e.Numero(3), e.Prod(e.Prod(e.Atomo('x'), e.Atomo('x')), e.Prod(e.Atomo('x'), e.Atomo('x')))), // 3x^4
+            e.Resta(e.Numero(0), e.Prod(e.Numero(5), e.Prod(e.Prod(e.Atomo('x'), e.Atomo('x')), e.Atomo('x'))))  // -5x^3
+          ),
+          e.Prod(e.Numero(2), e.Prod(e.Atomo('x'), e.Atomo('x'))) // 2x^2
+        ),
+        e.Resta(e.Numero(0), e.Prod(e.Numero(7), e.Atomo('x'))) // -7x
+      ),
+      e.Numero(4) // +4
+    )
+    val raizFuture = e.raizNewton(expr, e.Atomo('x'), 250.355, buenaAprox)
     val raiz = Await.result(raizFuture, Duration.Inf)
     assert(buenaAprox(expr, e.Atomo('x'), raiz))
   }
 
   test("raizNewtonTest5") {
-    val expr = e.Resta(e.Prod(e.Atomo('x'), e.Logaritmo(e.Atomo('x'))), e.Numero(3.0))
+    val expr = e.Suma(
+      e.Suma(
+        e.Suma(
+          e.Suma(
+            e.Suma(
+              e.Prod(e.Numero(4), e.Prod(e.Prod(e.Prod(e.Atomo('x'), e.Atomo('x')), e.Atomo('x')), e.Prod(e.Atomo('x'), e.Atomo('x')))), // 4x^5
+              e.Resta(e.Numero(0), e.Prod(e.Numero(3), e.Prod(e.Prod(e.Prod(e.Atomo('x'), e.Atomo('x')), e.Atomo('x')), e.Atomo('x'))))  // -3x^4
+            ),
+            e.Prod(e.Numero(1), e.Prod(e.Prod(e.Atomo('x'), e.Atomo('x')), e.Atomo('x'))) // x^3
+          ),
+          e.Resta(e.Numero(0), e.Prod(e.Numero(2), e.Prod(e.Atomo('x'), e.Atomo('x')))) // -2x^2
+        ),
+        e.Prod(e.Numero(1), e.Atomo('x')) // x
+      ),
+      e.Resta(e.Numero(0), e.Numero(6)) // -6
+    )
     val raizFuture = e.raizNewton(expr, e.Atomo('x'), 124.015, buenaAprox)
     val raiz = Await.result(raizFuture, Duration.Inf)
     assert(buenaAprox(expr, e.Atomo('x'), raiz))
